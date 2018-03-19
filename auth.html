@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- head -->
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="authentiocation page">
+  <meta name="author" content="itamar">
+
+  <title>Authentication</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- My (Itamar) Css For the Switches and other configurations -->
+  <link href="./assets/css/mycss.css" rel="stylesheet">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
+  <!-- Configure Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+</head>
+
+
+<!-- Bodey -->
+<body>
+
+ <div id="page-wrapper" class="container">
+
+  <br>
+  <br>
+  <h5>SignUp</h5>
+  <input type="text" id="email_input" placeholder="Email">
+  <input type="text" id="pass_input" placeholder="Password">
+  <br>
+  <br>
+  <button id="sign_up_button">Sign Up</button>
+  <button id="log_in_button">Log In</button>
+</div>
+
+<!-- <script src="./assets/js/app.js"></script> -->
+<script src="./assets/js/logic/generalApp.js"></script>
+<script src="./assets/js/logic/FbAuth.js"></script>
+
+</body>
+</html>

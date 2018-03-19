@@ -1,0 +1,164 @@
+<!-- This needs to be changed to climate.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Fertigation</title>
+
+  <!-- Load the JavaScript Functions For FB -->
+  <!-- // <script type="text/javascript" src="./assets/js/FBFunctionsForClimate.js"></script> -->
+  <!-- Bootstrap Core CSS -->
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- My (Itamar) Css For the Switches and other configurations -->
+  <link href="./assets/css/mycss.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+</head>
+
+
+<body>
+   <!-- Nav Bar
+   Grey with black text
+   https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp -->
+   <nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="climate_control.html">Climate</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="light_control.html">Light</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="fertigation_control.html">Fertigation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="settings.html">Settings</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <p id="userEmail">userEmail</p>
+      </li>
+      <li class="nav-item">
+        <button id="log_out_button_index">Log Out</button>  
+      </li>
+    </ul>
+  </nav>
+
+  <div id="page-wrapper" class="container">
+   <br>
+   <br>
+
+   <!-- ############## Guages ################# -->
+
+   <div class="row text-center">
+     <div class="col-lg-4 col-sm-12">
+       <h5>Water Temp</h5>
+       <div class="centerBlock">
+         <div class="centerInCol">
+          <div id="chart_div2" style="width: 120px; height: 120px;"></div>
+        </div>
+      </div>
+      <pre id="airHumidVal"></pre>
+      <br>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+     <h5>Water PH</h5>
+     <div class="centerInCol">
+      <div id="chart_div3" style="width: 120px; height: 120px;"></div>
+    </div>
+    <pre id="airTempVal"></pre>
+    <br>
+  </div>
+
+  <div class="col-lg-4 col-sm-12">
+     <h5>Water EC</h5>
+     <div class="centerInCol">
+      <div id="chart_div4" style="width: 120px; height: 120px;"></div>
+    </div>
+    <pre id="airTempVal"></pre>
+    <br>
+  </div>
+</div>
+
+  <br>
+  <br>
+
+<!-- ############## Line Charts ################# -->
+
+<!-- Input text for chosing the day of charts      -->
+<div class="center">
+  <input type="text" id="dateTextInput" value="yyyy-mm-dd">
+  <br>
+  <button onclick="fromFBToCharts()">Submit</button>
+</div>
+
+<br>
+<br>
+
+<!-- Line Charts -->
+
+<h5>Daily Water Temp</h5>
+<div id="temp_line_chart"></div>
+<br>
+<br>
+<h5>Daily Water PH</h5>
+<div id="humid_line_chart"></div>
+
+<br>
+<br>
+
+<h5>Settings</h5>
+<br>
+<div class="row bg-secondary">
+  <div class="col-lg-6 col-sm-6">
+    <p> EC Val </p>
+    <p id="temp_max_text_view">C Max</p>
+    <!-- Disableing the key "e" to be inserted into the Input -->
+    <input type="number" onKeyDown="return event.keyCode !== 69" id="temp_max_val" placeholder="Update EC Val">
+    <br>
+    <br>
+    <button id="tempMaxButton" onclick="wirteToFBTempValues(this.id)">Submit</button>
+  </div>    
+
+  <div class="col-lg-6 col-sm-6">
+    <p> PH Val </p>
+    <p id="temp_min_text_view">C Min</p>
+    <input type="number"  onKeyDown="return event.keyCode !== 69" id="temp_min_val" placeholder="Update PH Val"> 
+    <br>
+    <br>
+    <button id="tempMinButton" onclick="wirteToFBTempValues(this.id)">Submit</button>
+  </div> 
+</div>
+</div>
+
+<!-- Load Different 3rd Party libraries -->
+<!-- jQuery -->
+<script src="./vendor/jquery/jquery-3.3.1.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
+
+<!-- Configure Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script> 
+
+<script src="./assets/js/generalApp.js"></script>
+<script src="./assets/js/userInfo.js"></script>
+<script type="text/javascript" src="./assets/js/FBFunctionsForClimate.js"></script>
+<script src="./assets/js/climate_control.js"></script>
+
+</body>
+</html>
