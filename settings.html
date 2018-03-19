@@ -92,8 +92,27 @@
         <button id="f_messu_button" onclick="FBSetMeasurement(this.id)">F</button>
         <br>
         <p id="ChosenMessuTextView">?</p>
+
+
+
+
+
+        <!-- ###########  OpenWetherAPI  ################  FOR YULIA (LOVE!!!!)-->
+        <h5> OpenWether API testing</h5>
+        <input type="text" id="chosen_city" placeholder="Yor City">
+        <button id="open_wether_button" onclick="getWeather()">Get Weather</button>
+        
+
+        <p id="city_temp"></p>
+        <p id="city_humid"></p>
+        <img id="city_icon" src="http://openweathermap.org/img/w/09d.png" />
+
       
   </div>
+
+<!-- Load Different 3rd Party libraries -->
+<!-- jQuery -->
+<script src="./vendor/jquery/jquery-3.3.1.min.js"></script>
 
 <script src="./assets/js/generalApp.js"></script>
 <script src="./assets/js/userInfo.js"></script>

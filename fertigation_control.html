@@ -65,28 +65,28 @@
        <h5>Water Temp</h5>
        <div class="centerBlock">
          <div class="centerInCol">
-          <div id="chart_div2" style="width: 120px; height: 120px;"></div>
+          <div id="water_temp_guage" style="width: 120px; height: 120px;"></div>
         </div>
       </div>
-      <pre id="airHumidVal"></pre>
+      <pre id="waterTempTV"></pre>
       <br>
     </div>
 
     <div class="col-lg-4 col-sm-12">
      <h5>Water PH</h5>
      <div class="centerInCol">
-      <div id="chart_div3" style="width: 120px; height: 120px;"></div>
+      <div id="water_ph_guage" style="width: 120px; height: 120px;"></div>
     </div>
-    <pre id="airTempVal"></pre>
+    <pre id="waterPhTV"></pre>
     <br>
   </div>
 
   <div class="col-lg-4 col-sm-12">
      <h5>Water EC</h5>
      <div class="centerInCol">
-      <div id="chart_div4" style="width: 120px; height: 120px;"></div>
+      <div id="water_ec_guage" style="width: 120px; height: 120px;"></div>
     </div>
-    <pre id="airTempVal"></pre>
+    <pre id="waterEcTV"></pre>
     <br>
   </div>
 </div>
@@ -100,7 +100,7 @@
 <div class="center">
   <input type="text" id="dateTextInput" value="yyyy-mm-dd">
   <br>
-  <button onclick="fromFBToCharts()">Submit</button>
+  <button onclick="drawFertigationLineCharts()">Submit</button>
 </div>
 
 <br>
@@ -109,11 +109,15 @@
 <!-- Line Charts -->
 
 <h5>Daily Water Temp</h5>
-<div id="temp_line_chart"></div>
+<div id="waterTemp_line_chart"></div>
 <br>
 <br>
 <h5>Daily Water PH</h5>
-<div id="humid_line_chart"></div>
+<div id="ph_line_chart"></div>
+<br>
+<br>
+<h5>Daily Water EC</h5>
+<div id="ec_line_chart"></div>
 
 <br>
 <br>
@@ -158,7 +162,7 @@
 <script src="./assets/js/generalApp.js"></script>
 <script src="./assets/js/userInfo.js"></script>
 <script type="text/javascript" src="./assets/js/FBFunctionsForClimate.js"></script>
-<script src="./assets/js/climate_control.js"></script>
+<script src="./assets/js/fertigation_control.js"></script>
 
 </body>
 </html>
