@@ -225,30 +225,7 @@ function drawTempGuage() {
     chart.draw(data, options);
   }
 
-  // Execute the Drawing of the line chart
-//  google.charts.setOnLoadCallback(drawTempLineChartFromFB);
-//  google.charts.setOnLoadCallback(drawHumidLineChartFromFB);
-//  getDate();
   fromFBToCharts();
-
-    // Date Functions
-    // Can also use this https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_tolocalestring
-    function getDate() {
-
-      var today = new Date();
-      var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd= '0'+ dd;
-    } 
-    if(mm<10){
-      mm= '0'+ mm;
-    } 
-    var today = mm+'-'+dd+'-'+yyyy;
-    document.getElementById("dateTextInput").value = today;
-  }
 
   //#####################################
   // FB AUTH for logout at the menu bar
@@ -312,5 +289,11 @@ function drawTempGuage() {
 						wirteToFBTempValues(arr[ii].id);
 					});
 		 });
+	});
+	
+	// adds a listener to history charts update button
+  document.getElementById("dateButton").addEventListener('click', e => {
+			e.preventDefault();
+			fromFBToCharts();
 	});
 };

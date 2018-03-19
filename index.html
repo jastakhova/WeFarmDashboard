@@ -209,21 +209,40 @@ It checks if the user is Auth -->
           </div><!-- /row -->
 
           <div class="row mt">
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> Temperature</h4>
-                <div class="panel-body text-center">
-                  <canvas id="temperatureChart" height="300" width="400"></canvas>
+            <div class="green-panel panel-body" style="background-color: rgb(104, 223, 240, 0.2);">
+              <div class="row mt">
+                <div class="col-lg-6">
+                  <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> Temperature</h4>
+                    <div class="panel-body text-center">
+                      <canvas id="temperatureChart" height="300" width="400"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> Humidity</h4>
+                    <div class="panel-body text-center">
+                      <canvas id="humidityChart" height="300" width="400"></canvas>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> Humidity</h4>
-                <div class="panel-body text-center">
-                  <canvas id="humidityChart" height="300" width="400"></canvas>
+              <div class="row mt">
+                <div class="col-lg-12">
+                  <div class="form-panel">
+                    <form class="form-horizontal style-form">
+                      <!--<div class="row mt">-->
+                        <label class="col-sm-3 control-label">Charts show data for the day of </label>
+                        <div class="col-sm-2">
+                          <input type="text" class="form-control" id="dateTextInput"/>
+                        </div>
+                        <button type="submit" class="btn btn-theme" style="margin-left:10px;" id="dateButton">Change</button>
+                      <!--</div>-->
+                    </form>
+                  </div>
                 </div>
-              </div>
+              </div><!-- /row -->
             </div>
           </div>
 

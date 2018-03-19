@@ -52,8 +52,13 @@ function wirteToFBWindowFan(id) {
 
 // Line Chart Functions
 function fromFBToCharts() {
-	var date = "03-18-2018";
-//  var date = document.getElementById("dateTextInput").value;
+	var dateElement = document.getElementById("dateTextInput");
+	if (dateElement.value == "") {
+		//sets current date to the history chart control
+  	dateElement.value = $.datepicker.formatDate('mm-dd-yy', new Date());
+	}
+
+  var date = dateElement.value;
   // Retrive the Data from Humid + Temps
 //  FBRefTemp = firebase.database().ref().child('DailyTemp').child(date);
 //  FBRefHumid = firebase.database().ref().child('DailyHumid').child(date);
