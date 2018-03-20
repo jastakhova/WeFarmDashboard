@@ -11,3 +11,14 @@ Please run the local instance via launching *index.html*.
 
 * **Itamar Willenz** - *Initial work* - [WeFarmClimate_DashBoard](https://github.com/itamar6587/WeFarmClimate_DashBoard)
 * **Yulia Astakhova** - *Integration with a UI template*
+
+## TODO
+
+* Add Fertigation page
+* Add Settings page
+* Active tab doesn't change
+* Add login
+* Add open weather block to the index page
+* Lights update logic for time doesn't work
+* Use date selector for the history graphs
+* Refactor the site with use of Angular  

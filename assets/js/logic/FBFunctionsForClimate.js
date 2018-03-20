@@ -248,6 +248,11 @@ function drawLineCharts(type) {
 
     var chart = new google.visualization.LineChart(document.getElementById(id));
     chart.draw(data, options);
-
   });
+}
+
+function wirteToFBLightsSwitch(id){
+  var status = document.getElementById(id).checked;
+  // firebase.database().ref(id).set(status);
+  dbLightsRef.child(id).set(status);
 }

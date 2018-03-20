@@ -1,10 +1,6 @@
-
 // mUid to be used in this file
 var mUid;
 var dbClimateRef;
-
-
-
 
 (function() {
   firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -19,31 +15,17 @@ var dbClimateRef;
   });
 }());
 
-
-
 function runPage() {
-  console.log(mUid);
+	var user = firebase.auth().currentUser;
+	var name, email, photoUrl, uid, emailVerified;
 
-//####################
-// Load Libraries
-//####################
-//google.charts.load('current', {packages:['corechart', 'line' ,'gauge']});
-
-
-//################################################################
-//  User Information - need to find out how to make it a global var
-//############################################################
-
-var user = firebase.auth().currentUser;
-var name, email, photoUrl, uid, emailVerified;
-
-if (user != null) {
-  name = user.displayName;
-  email = user.email;
-  photoUrl = user.photoURL;
-  emailVerified = user.emailVerified;
-  uid = user.uid;
-}
+	if (user != null) {
+		name = user.displayName;
+		email = user.email;
+		photoUrl = user.photoURL;
+		emailVerified = user.emailVerified;
+		uid = user.uid;
+	}
 
   //#########################
   //  REGULAR PAGE
@@ -84,36 +66,6 @@ if (user != null) {
   var temp = 0;
   var humid = 0;
 
-  //########################
-  // Settings Section
-  //########################
-
-  // Write to the user what messurments we are using
-//  dbRefMessurment.on('value', snap => {
-//    messurmentTextView.innerText = "measurments  :  " +  snap.val();
-//  });
-
-  
-  //#########################################################
-  //  Getting Values From FireBase - and displaying on page
-  //########################################################
-
-
-  // Restart Button listener (if disabled or enabled)
-//  dbRefRestartSensor.on('value', snap => {
-//    var inProgress = snap.val();
-//    if (inProgress == false) {
-//      restartButton.disabled = false;
-//    }
-//
-//    if (inProgress == true) {
-//      restartButton.disabled = true;
-//    }
-//
-//  });
-
-  // Settings Part - show min max temp values
-
   dbRefTempMax.on('value', snap => {
     tempMaxView.value = snap.val();
   });
@@ -122,8 +74,6 @@ if (user != null) {
     tempMinView.value = snap.val();
   });
 
-
-  // Guage part - show current Temp and Humid
 
   dbRefAirTemp.on('value', snap => {
     temp = snap.val();
@@ -135,13 +85,11 @@ if (user != null) {
     	temp += "°C";
     }                            
     preAirTemp.innerText = temp;
-//    drawTempGuage();
   })
   
   dbRefAirHumid.on('value', snap => {
     humid = snap.val();
     preAirHumid.innerText = snap.val() + "%";
-//    drawHumidGuage();
   })
   
   function setCheckbox(switchElement, snap) {
@@ -168,63 +116,6 @@ if (user != null) {
   }) 
 
 
-// The Gauge Tempurature Elements - // https://developers.google.com/chart/interactive/docs/gallery/gauge
-
-function drawTempGuage() {
-
-	return;
-
-  var data = google.visualization.arrayToDataTable([
-    ['Label', 'Value'],
-    ['Temperature', temp],
-    ]);
-
-  if (mMeasurements == "f") {
-    var options = {
-      width: 120, height: 120,
-      min:0, max:122, 
-      redFrom: 104, redTo: 122,
-      yellowFrom:86, yellowTo: 104,
-      greenFrom:59, greenTo: 86,
-      minorTicks: 10
-    };
-
-  } else {  // Messurments are in C
-    var options = {
-      width: 120, height: 120,
-      min:0, max:50, 
-      redFrom: 40, redTo: 50,
-      yellowFrom:30, yellowTo: 40,
-      greenFrom:15, greenTo: 30,
-      minorTicks: 10
-    };
-  }
-  
-  var chart = new google.visualization.Gauge(document.getElementById('chart_div3'));
-
-  chart.draw(data, options);
-}
-
-  // The Gauge Humidity Element
-  function drawHumidGuage() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Label', 'Value'],
-      ['Humidity', humid]
-      ]);
-
-    var options = {
-      width: 120, height: 120,
-      redFrom: 90, redTo: 100,
-      yellowFrom:75, yellowTo: 90,
-      minorTicks: 5,
-    };
-
-    var chart = new google.visualization.Gauge(document.getElementById('chart_div2'));
-
-    chart.draw(data, options);
-  }
-
   fromFBToCharts();
 
   //#####################################
@@ -236,60 +127,28 @@ function drawTempGuage() {
 
   // Add LogOut Evenet
   logOutButtonIndex.addEventListener('click', e => {
-      //Get email and pass from input text
-      console.log('love'); 
       firebase.auth().signOut();
     });
   
-  // adds a click listener to the form locker button
-  Array.from(document.getElementsByClassName("locker")).map(function(x, i, ar) {
-			ar[i].addEventListener('click', e => {
-				e.preventDefault();
-				// changes appearance of the locker button between locked and unlocked state
-				iClassName = ar[i].getElementsByTagName("i")[0].className;
-				if (iClassName.indexOf("fa-lock") >= 0) {
-					newClassName = iClassName.replace("fa-lock", "fa-unlock");
-					ar[i].className = ar[i].className.replace("btn-primary", "btn-success");
-				} else {
-					newClassName = iClassName.replace("fa-unlock", "fa-lock");
-					ar[i].className = ar[i].className.replace("btn-success", "btn-primary");
-				}
-				ar[i].getElementsByTagName("i")[0].className = newClassName;
-				
-				// activates or deactivates switches
-				Array.from(ar[i].parentElement.parentElement.parentElement.getElementsByClassName("switch")).map(function(xx, ii, arr) {
-					iClassName = arr[ii].className;
-					if (iClassName.indexOf("deactivate") >= 0) {
-						arr[ii].className = iClassName.replace("deactivate", "");
-					} else {
-						arr[ii].className = iClassName.replace("switch", "switch deactivate");
-					}
+  addLockerLogic(function(lockerElement) {
+  	// adds a listener to the change of state for the switches to write the new value to the database
+	 Array.from(lockerElement.parentElement.parentElement.parentElement.getElementsByTagName("input")).map(function(xx, ii, arr) {
+			if (arr[ii].parentElement.className.indexOf("switch-animate") >= 0) {
+				arr[ii].parentElement.parentElement.addEventListener('click', e => {
+					arr[ii].checked = arr[ii].parentElement.className.indexOf("switch-on") >= 0;
+					wirteToFBWindowFan(arr[ii].id);
 				});
-				
-				// activates or deactivates inputs
-				Array.from(ar[i].parentElement.parentElement.parentElement.getElementsByTagName("input")).map(function(xx, ii, arr) {
-					arr[ii].disabled = !arr[ii].disabled;
+			}
+	 });
+
+	 // adds a listener to event on update buttons
+	 Array.from(lockerElement.parentElement.parentElement.parentElement.getElementsByClassName("btn btn-theme")).map(function(xx, ii, arr) {
+				arr[ii].addEventListener('click', e => {
+					e.preventDefault();
+					wirteToFBTempValues(arr[ii].id);
 				});
-		 });
-		 
-		 // adds a listener to the change of state for the switches to write the new value to the database
-		 Array.from(ar[i].parentElement.parentElement.parentElement.getElementsByTagName("input")).map(function(xx, ii, arr) {
-		 		if (arr[ii].parentElement.className.indexOf("switch-animate") >= 0) {
-		 		  arr[ii].parentElement.parentElement.addEventListener('click', e => {
-						arr[ii].checked = arr[ii].parentElement.className.indexOf("switch-on") >= 0;
-						wirteToFBWindowFan(arr[ii].id);
-					});
-		 		}
-		 });
-     
-     // adds a listener to event on update buttons
-		 Array.from(ar[i].parentElement.parentElement.parentElement.getElementsByClassName("btn btn-theme")).map(function(xx, ii, arr) {
-					arr[ii].addEventListener('click', e => {
-						e.preventDefault();
-						wirteToFBTempValues(arr[ii].id);
-					});
-		 });
-	});
+	 });
+  });
 	
 	// adds a listener to history charts update button
   document.getElementById("dateButton").addEventListener('click', e => {

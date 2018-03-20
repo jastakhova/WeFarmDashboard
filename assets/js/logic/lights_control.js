@@ -26,56 +26,21 @@ function runPage() {
   //#########################
 
   // Switches
-  const lightsManualSwitch = document.getElementById('lightsManualSwitch');
   const lightsSwitch = document.getElementById('lightsSwitch');
   // Lights On Off values
   const lightsOnTimeInput = document.getElementById('lightsOnTimeInput');
   const lightsOffTimeInput = document.getElementById('lightsOffTimeInput');
 
   // Create reference to FireBase
-  const dbRefLightsManualSwitch = dbLightsRef.child('lightsManualSwitch');
   const dbRefLightsSwitch = dbLightsRef.child('lightsSwitch');
   const dbRefLightsOnTime = dbLightsRef.child('lightsOnTime');
   const dbRefLightsOffTime = dbLightsRef.child('lightsOffTime');
   
-
-  //#########################################################
-  //  Getting Values From FireBase - and displaying on page
-  //########################################################
-
-  // Settings Part - show Lights On and Off time values
-
-  // dbRefTempMax.on('value', snap => {
-  //   tempMaxView.innerText = snap.val();
-  // });
-
-  // dbRefTempMin.on('value', snap => {
-  //   tempMinView.innerText = snap.val();
-  // });
-
-
   // Fan  Window and general Listeners
   dbRefLightsSwitch.on('value', snap => {
     lightsSwitch.checked = snap.val();
-  }) 
+  });
 
-  dbRefLightsManualSwitch.on('value', snap => {
-    lightsManualSwitch.checked = snap.val();
-  }) 
-
-  // dbRefWindow.on('value', snap => {
-  //   windowSwitch.checked = snap.val();
-  // }) 
-
-  // dbRefGeneral.on('value', snap => {
-  //   generalSwitch.checked = snap.val();
-  // }) 
-
-
-  //############################
-  // FB AUTH
-  //############################
-  
   // Elements
   const logOutButtonIndex = document.getElementById('log_out_button_index');
 
@@ -98,4 +63,22 @@ function runPage() {
     }
   });
   
+  addLockerLogic(function(lockerElement) {
+    	// adds a listener to the change of state for the switches to write the new value to the database
+  	 Array.from(lockerElement.parentElement.parentElement.parentElement.getElementsByTagName("input")).map(function(xx, ii, arr) {
+  			if (arr[ii].parentElement.className.indexOf("switch-animate") >= 0) {
+  				arr[ii].parentElement.parentElement.addEventListener('click', e => {
+  					arr[ii].checked = arr[ii].parentElement.className.indexOf("switch-on") >= 0;
+  					wirteToFBLightsSwitch(arr[ii].id);
+  				});
+  			}
+  	 });
+
+  	 // adds a listener to event on update buttons
+  	 Array.from(lockerElement.parentElement.parentElement.parentElement.getElementsByClassName("btn btn-theme")).map(function(xx, ii, arr) {
+  				arr[ii].addEventListener('click', e => {
+  					e.preventDefault();
+  				});
+  	 });
+    });
 };
