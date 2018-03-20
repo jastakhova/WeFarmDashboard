@@ -130,126 +130,24 @@ function snapshotToArray(type, snapshot) {
       };
 }
 
-function drawClimateLineCharts() {
-  drawLineCharts("airTemp");
-  drawLineCharts("airHumid");
-}
-
-
-function drawFertigationLineCharts() {
-  drawLineCharts("waterTemp");
-  drawLineCharts("waterPh");
-  drawLineCharts("waterEc");
-}
-
-function drawTempLineChartFromFB(dataFromFB) {
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'X');
-  data.addColumn('number', 'temperature');
-
-  data.addRows(dataFromFB);
-
-  var options = {
-    hAxis: {
-      logScale: true
-    },
-    vAxis: {
-      logScale: false
-    },
-    colors: ['#a52714']
-  };
-
-  var chart = new google.visualization.LineChart(document.getElementById('temp_line_chart'));
-  chart.draw(data, options);
-}
-
-
-function drawHumidLineChartFromFB(dataFromFB) {
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'X');
-  data.addColumn('number', 'Humidity');
-
-  data.addRows(dataFromFB);
-
-  var options = {
-    hAxis: {
-      logScale: true
-    },
-    vAxis: {
-      logScale: false
-    },
-    colors: ['#097138']
-  };
-
-  var chart = new google.visualization.LineChart(document.getElementById('humid_line_chart'));
-  chart.draw(data, options);
-}
-
-function drawLineCharts(type) {
-  var date = document.getElementById("dateTextInput").value;
-  var FBRef;
-  var chartType;
-  var id;
-  var dataFromFB;
-  var arry;
-
-  switch(type) {
-    case  "airTemp" :
-      FBRef = dbClimateRef.child('history').child('DailyTemp').child(date);
-      chartType = "temperature";
-      id = "temp_line_chart";
-      break;
-
-    case "airHumid" :
-      FBRef = dbClimateRef.child('history').child('DailyHumid').child(date);
-      chartType = "Humidity";
-      id = "humid_line_chart";
-      break;
-
-    case "waterTemp" :
-      FBRef = FBUserRef.child('fertigation').child('history').child('temperature').child(date);
-      chartType = "temperature";
-      id = "waterTemp_line_chart";
-      break;
-
-    case "waterPh" :
-      FBRef = FBUserRef.child('fertigation').child('history').child('ph').child(date);
-      chartType = "PH";
-      id = "ph_line_chart";
-      break;
-
-    case "waterEc" :
-      FBRef = FBUserRef.child('fertigation').child('history').child('ec').child(date);
-      chartType = "EC";
-      id = "ec_line_chart";
-      break;
-  }
-
-  FBRef.once('value').then(function(snapshot) {
-    dataFromFB = snapshot.val();
-    arry = snapshotToArray(chartType , snapshot);
-
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'X');
-    data.addColumn('number', chartType);
-
-    data.addRows(arry);
-
-    var options = {
-      hAxis: {
-
-        logScale: true
-       },
-      vAxis: {
-        logScale: false
-      },
-    colors: ['#097138']
-    };
-
-    var chart = new google.visualization.LineChart(document.getElementById(id));
-    chart.draw(data, options);
-  });
-}
+//    case "waterTemp" :
+//      FBRef = FBUserRef.child('fertigation').child('history').child('temperature').child(date);
+//      chartType = "temperature";
+//      id = "waterTemp_line_chart";
+//      break;
+//
+//    case "waterPh" :
+//      FBRef = FBUserRef.child('fertigation').child('history').child('ph').child(date);
+//      chartType = "PH";
+//      id = "ph_line_chart";
+//      break;
+//
+//    case "waterEc" :
+//      FBRef = FBUserRef.child('fertigation').child('history').child('ec').child(date);
+//      chartType = "EC";
+//      id = "ec_line_chart";
+//      break;
+//  }
 
 function wirteToFBLightsSwitch(id){
   var status = document.getElementById(id).checked;

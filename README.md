@@ -14,11 +14,15 @@ Please run the local instance via launching *index.html*.
 
 ## TODO
 
-* Add Fertigation page
+* Add Fertigation page charts
 * Add Settings page
 * Active tab doesn't change
 * Add login
 * Add open weather block to the index page
 * Lights update logic for time doesn't work
+* Water EC is 0
+* C vs F
+* Min/max values in fertigation logic
+* Always maintain white panels around state blocks
 * Use date selector for the history graphs
 * Refactor the site with use of Angular  

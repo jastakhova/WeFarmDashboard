@@ -4,8 +4,6 @@ var mUid;
 var dbFertigationRef;
 
 
-
-
 (function() {
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
@@ -23,13 +21,6 @@ var dbFertigationRef;
 
 
 function runPage() {
-  console.log(mUid);
-
-//####################
-// Load Libraries
-//####################
-google.charts.load('current', {packages:['corechart', 'line' ,'gauge']}); 
-
 
 //################################################################
 //  User Information - need to find out how to make it a global var
@@ -50,7 +41,6 @@ if (user != null) {
   //  REGULAR PAGE
   //#########################
 
-  
   // Get element
   const waterTempTV = document.getElementById('waterTempTV');
   const waterPhTV = document.getElementById('waterPhTV');
@@ -86,8 +76,7 @@ if (user != null) {
 
     temp = snap.val();
     temp = parseFloat(temp);  // Getting Temp from firebase as String - parsing it into float (this is needed for the gauge element)
-    waterTempTV.innerText = temp;
-    drawTempGuage();
+    waterTempTV.innerText = temp  + " °C";
   });
 
   dbRefWaterPH.on('value', snap => {
@@ -95,7 +84,6 @@ if (user != null) {
     ph = snap.val();
     ph = parseFloat(ph);
     waterPhTV.innerText = ph;
-    drawPHGuage();
   });
 
   dbRefWaterEC.on('value', snap => {
@@ -106,94 +94,9 @@ if (user != null) {
   });
 
 
-// The Gauge Tempurature Elements - // https://developers.google.com/chart/interactive/docs/gallery/gauge
-
-function drawTempGuage() {
-
-  var data = google.visualization.arrayToDataTable([
-    ['Label', 'Value'],
-    ['Temperature', temp],
-    ]);
-
-  console.log("data");
-  console.log(data);
-
-  if (mMeasurements == "f") {
-    var options = {
-      width: 120, height: 120,
-      min:0, max:122, 
-      redFrom: 104, redTo: 122,
-      yellowFrom:86, yellowTo: 104,
-      greenFrom:59, greenTo: 86,
-      minorTicks: 10
-    };
-
-  } 
-  else {  // Messurments are in C
-    var options = {
-      width: 120, height: 120,
-      min:0, max:50, 
-      redFrom: 40, redTo: 50,
-      yellowFrom:30, yellowTo: 40,
-      greenFrom:15, greenTo: 30,
-      minorTicks: 10
-    };
-  }
-  
-  var chart = new google.visualization.Gauge(document.getElementById('water_temp_guage'));
-  chart.draw(data, options);
-}
-
-  // The Gauge Humidity Element
-  function drawPHGuage() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Label', 'Value'],
-      ['PH', ph]
-      ]);
-
-    var options = {
-      width: 120, height: 120,
-      min:0, max:10, 
-      redFrom: 0, redTo: 3,
-      yellowFrom: 3 , yellowTo: 6,
-      greenFrom:6, greenTo: 7,
-      minorTicks: 5,
-    };
-
-    var chart = new google.visualization.Gauge(document.getElementById('water_ph_guage'));
-
-    chart.draw(data, options);
-  }
-
-  // Execute the Drawing of the line chart
-  // google.charts.setOnLoadCallback(drawTempLineChartFromFB);
-  // google.charts.setOnLoadCallback(drawHumidLineChartFromFB);
-
-
-  getDate();
-  drawLineCharts("waterTemp");
-  drawLineCharts("waterPh");
-  drawLineCharts("waterEc");
-
-    // Date Functions
-    // Can also use this https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_tolocalestring
-    function getDate() {
-
-      var today = new Date();
-      var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-
-    var yyyy = today.getFullYear();
-    if(dd<10){
-      dd='0'+dd;
-    } 
-    if(mm<10){
-      mm='0'+mm;
-    } 
-    var today = mm+'-'+dd+'-'+yyyy;
-    document.getElementById("dateTextInput").value = today;
-  }
+//  drawLineCharts("waterTemp");
+//  drawLineCharts("waterPh");
+//  drawLineCharts("waterEc");
 
   //#####################################
   // FB AUTH for logout at the menu bar
@@ -221,4 +124,18 @@ function drawTempGuage() {
     }
   });
   
+  addLockerLogic(function(lockerElement) {
+  	 // adds a listener to event on update buttons
+  	 Array.from(lockerElement.parentElement.parentElement.parentElement.getElementsByClassName("btn btn-theme")).map(function(xx, ii, arr) {
+  				arr[ii].addEventListener('click', e => {
+  					e.preventDefault();
+  				});
+  	 });
+    });
+    
+  // adds a listener to history charts update button
+	document.getElementById("dateButton").addEventListener('click', e => {
+			e.preventDefault();
+			fromFBToCharts();
+	});
 };
