@@ -14,14 +14,14 @@ Please run the local instance via launching *index.html*.
 
 ## TODO
 
-* Add Settings page
-* Active tab doesn't change
-* Add login
-* Add open weather block to the index page
-* Lights update logic for time doesn't work
-* Water EC is 0
+* Add login / logout
 * C vs F
-* Min/max values in fertigation logic
+* Check why Firebase doesn't load from filesystem launch
+* Add open weather block to the index page
+* Possibility to set device
 * Always maintain white panels around state blocks
-* Use date selector for the history graphs
+* Water EC is 0
+* Min/max values in fertigation logic
+* Lights update logic for time doesn't work
+* Use date selector HTML element
 * Refactor the site with use of Angular  

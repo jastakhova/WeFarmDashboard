@@ -34,10 +34,10 @@ function runPage() {
 
   //Show Messurment on Page
   FBUserInfoRef.child('mMeasurements').on('value', snap => {
-    var messurment = snap.val();
-    mChosenMessuTextView.innerText = messurment;
-    });
-
+  	document.getElementById("c_messu_button").className = "btn btn-default";
+  	document.getElementById("f_messu_button").className = "btn btn-default";
+    document.getElementById(snap.val() + "_messu_button").className = "btn btn-default active";
+	});
 }
 
 
