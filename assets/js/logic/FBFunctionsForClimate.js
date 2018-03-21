@@ -59,19 +59,20 @@ function fromFBToCharts() {
 	}
 
   var date = dateElement.value;
-  // Retrive the Data from Humid + Temps
-//  FBRefTemp = firebase.database().ref().child('DailyTemp').child(date);
-//  FBRefHumid = firebase.database().ref().child('DailyHumid').child(date);
-  // After Adding the UID Functionalityt
   FBRefTemp = dbClimateRef.child('history').child('DailyTemp').child(date);
   FBRefHumid = dbClimateRef.child('history').child('DailyHumid').child(date);
+  FBRefWaterTemp = FBUserRef.child('fertigation').child('history').child('temperature').child(date);
+  FBRefWaterPH = FBUserRef.child('fertigation').child('history').child('ph').child(date);
+  FBRefWaterEC = FBUserRef.child('fertigation').child('history').child('ec').child(date);
 
   // Humid Array
   FBRefHumid.once('value').then(function(snapshot) {
     var dataFromFB = snapshot.val();
     var arry = snapshotToArray("humid", snapshot);
     console.log(arry);
-    new Chart(document.getElementById("humidityChart").getContext("2d")).Line(arry);
+    if (document.getElementById("humidityChart")) {
+    	new Chart(document.getElementById("humidityChart").getContext("2d")).Line(arry);
+    }
   });
   
 
@@ -80,8 +81,37 @@ function fromFBToCharts() {
     var dataFromFB = snapshot.val();
     var arry = snapshotToArray("temp", snapshot);
     console.log(arry);
-    new Chart(document.getElementById("temperatureChart").getContext("2d")).Line(arry);
+    if (document.getElementById("temperatureChart")) {
+    	new Chart(document.getElementById("temperatureChart").getContext("2d")).Line(arry);
+    }
   });
+  
+  FBRefWaterTemp.once('value').then(function(snapshot) {
+      var dataFromFB = snapshot.val();
+      var arry = snapshotToArray("temp", snapshot);
+      console.log(arry);
+      if (document.getElementById("temperatureChart")) {
+      	new Chart(document.getElementById("temperatureChart").getContext("2d")).Line(arry);
+      }
+    });
+    
+  FBRefWaterPH.once('value').then(function(snapshot) {
+        var dataFromFB = snapshot.val();
+        var arry = snapshotToArray("ph", snapshot);
+        console.log(arry);
+        if (document.getElementById("phChart")) {
+        	new Chart(document.getElementById("phChart").getContext("2d")).Line(arry);
+        }
+      });
+        
+  FBRefWaterEC.once('value').then(function(snapshot) {
+          var dataFromFB = snapshot.val();
+          var arry = snapshotToArray("ec", snapshot);
+          console.log(arry);
+          if (document.getElementById("ecChart")) {
+          	new Chart(document.getElementById("ecChart").getContext("2d")).Line(arry);
+          }
+        });
 }
 
 

@@ -14,7 +14,6 @@ Please run the local instance via launching *index.html*.
 
 ## TODO
 
-* Add Fertigation page charts
 * Add Settings page
 * Active tab doesn't change
 * Add login

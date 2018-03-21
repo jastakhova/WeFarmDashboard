@@ -115,11 +115,8 @@ if (user != null) {
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
       console.log(firebaseUser); 
-      // logOutButton.disabled = false;
-      // window.open("climate_control.html","_self");
     } else {
       console.log('not logged in');
-      // logOutButton.disabled = true;
       window.open("auth.html","_self");
     }
   });
@@ -138,4 +135,6 @@ if (user != null) {
 			e.preventDefault();
 			fromFBToCharts();
 	});
+	
+	fromFBToCharts()
 };
