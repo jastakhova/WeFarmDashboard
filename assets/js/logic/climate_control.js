@@ -147,4 +147,32 @@ function runPage() {
 			e.preventDefault();
 			fromFBToCharts();
 	});
+	
+	function updateWeather() {
+		$.get("http://ipinfo.io", function(response) {
+        		document.getElementById("city").innerText = response.city.toUpperCase();
+  
+        		var xhr = new XMLHttpRequest();
+        		xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=" + response.city + ",us&units=metric&appid=52110cc91d0623d632d20820991119f4", false);
+        		xhr.send();
+  
+        		var response = JSON.parse(xhr.response);
+  
+        		var temp = response.main.temp;
+        		if (mMeasurements == "f") {
+                  temp = ((+((temp * 1.8) + 32).toFixed(2) * 100 ) / 100) + "°F";
+                } else {
+                	temp += "°C";
+                }
+  
+      			document.getElementById("city_temperature").innerText = temp;
+        		var humid = response.main.humidity; // not used so far
+        		var icon = response.weather[0].icon;
+        		document.getElementById("city_icon").src = "http://openweathermap.org/img/w/" + icon + ".png";
+            }, "jsonp");
+            
+            window.setTimeout(updateWeather, 20000);
+  	}
+
+	window.setTimeout(updateWeather, 1000);
 };

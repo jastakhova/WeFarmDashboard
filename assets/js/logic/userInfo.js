@@ -29,7 +29,6 @@
       FBUserInfoRef = firebase.database().ref('users').child(Uid).child('users_info');
       FBUserInfoRef.child('mMeasurements').on('value', snap => {
         mMeasurements = snap.val();
-        console.log("Messurment  = " + mMeasurements);
       })
     
 

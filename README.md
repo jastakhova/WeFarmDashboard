@@ -14,9 +14,8 @@ Please run the local instance via launching *index.html*.
 
 ## TODO
 
-* Check why Firebase doesn't load from filesystem launch
-* Add open weather block to the index page
 * Possibility to set device
+* should we show an outside humidity?
 * Always maintain white panels around state blocks
 * Water EC is 0
 * Min/max values in fertigation logic
