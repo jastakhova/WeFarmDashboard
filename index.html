@@ -1,13 +1,5 @@
-
-<!-- This is the Landing page of the Webapp
-It checks if the user is Auth -->
-
-<!-- Love -->
-
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- head -->
 <head>
 
   <meta charset="utf-8">
@@ -44,24 +36,19 @@ It checks if the user is Auth -->
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-
 </head>
-
 <body>
 
   <script src="./assets/js/logic/generalApp.js"></script>
 
-<script> 
-
-
-  firebase.auth().onAuthStateChanged(firebaseUser => {
-    if(!firebaseUser) {
-      window.open("auth.html","_self");
-      console.log('not logged in');
-    }
-  });
-
-</script>
+  <script>
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if(!firebaseUser) {
+        window.open("auth.html","_self");
+        console.log('not logged in');
+      }
+    });
+  </script>
 
 <section id="container" >
   <!-- **********************************************************************************************************************************************************
@@ -78,7 +65,7 @@ It checks if the user is Auth -->
     <div class="top-menu">
       <ul class="nav pull-right top-menu">
         <li><h6 class="email" id="userEmail"></h6></li>
-        <li><a id="log_out_button_index" class="logout" href="login.html">Logout</a></li>
+        <li><a id="log_out_button_index" class="logout" href="auth.html">Logout</a></li>
       </ul>
     </div>
   </header>
@@ -321,11 +308,6 @@ It checks if the user is Auth -->
         }
     </script>
 
-  <script src="./assets/js/logic/userInfo.js"></script>
-  <script src="./assets/js/logic/FBFunctionsForClimate.js"></script>
-  <script src="./assets/js/logic/locker.js"></script>
-  <script src="./assets/js/logic/climate_control.js"></script>
-
   <!--script for this page-->
   <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
   <script src="assets/js/chart-master/Chart.js"></script>
@@ -340,5 +322,10 @@ It checks if the user is Auth -->
   <script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
   <script src="assets/js/form-component.js"></script>
+  
+  <script src="./assets/js/logic/userInfo.js"></script>
+  <script src="./assets/js/logic/FBFunctionsForClimate.js"></script>
+  <script src="./assets/js/logic/locker.js"></script>
+  <script src="./assets/js/logic/climate_control.js"></script>
 </body>
 </html>

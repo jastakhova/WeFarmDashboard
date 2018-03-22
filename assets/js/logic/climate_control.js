@@ -122,14 +122,6 @@ function runPage() {
   // FB AUTH for logout at the menu bar
   //######################################
   
-  // Elements
-  const logOutButtonIndex = document.getElementById('log_out_button_index');
-
-  // Add LogOut Evenet
-  logOutButtonIndex.addEventListener('click', e => {
-      firebase.auth().signOut();
-    });
-  
   addLockerLogic(function(lockerElement) {
   	// adds a listener to the change of state for the switches to write the new value to the database
 	 Array.from(lockerElement.parentElement.parentElement.parentElement.getElementsByTagName("input")).map(function(xx, ii, arr) {

@@ -14,7 +14,6 @@ Please run the local instance via launching *index.html*.
 
 ## TODO
 
-* Add login / logout
 * C vs F
 * Check why Firebase doesn't load from filesystem launch
 * Add open weather block to the index page
@@ -23,5 +22,6 @@ Please run the local instance via launching *index.html*.
 * Water EC is 0
 * Min/max values in fertigation logic
 * Lights update logic for time doesn't work
+* Create an account doesn't work
 * Use date selector HTML element
 * Refactor the site with use of Angular  

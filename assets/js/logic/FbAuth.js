@@ -12,6 +12,7 @@
 
   // Add Login Evenet
   logInButton.addEventListener('click', e => {
+  	e.preventDefault();
     //Get email and pass from input text
     const email = txtEmail.value;
     const pass = txtPass.value;
@@ -27,6 +28,7 @@
 
   // Add SignUp Evenet
   signUpButton.addEventListener('click', e => {
+  	e.preventDefault();
     //Get email and pass from input text
     // TODO: Check if Real Email
     const email = txtEmail.value;

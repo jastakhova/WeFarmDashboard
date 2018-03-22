@@ -41,16 +41,6 @@ function runPage() {
     lightsSwitch.checked = snap.val();
   });
 
-  // Elements
-  const logOutButtonIndex = document.getElementById('log_out_button_index');
-
-  // Add LogOut Evenet
-  logOutButtonIndex.addEventListener('click', e => {
-      //Get email and pass from input text
-      console.log('love'); 
-      firebase.auth().signOut();
-    });
-
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
       console.log(firebaseUser); 
