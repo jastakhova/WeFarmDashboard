@@ -14,7 +14,6 @@ Please run the local instance via launching *index.html*.
 
 ## TODO
 
-* C vs F
 * Check why Firebase doesn't load from filesystem launch
 * Add open weather block to the index page
 * Possibility to set device

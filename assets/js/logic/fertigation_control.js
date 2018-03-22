@@ -70,13 +70,11 @@ if (user != null) {
   dbRefWaterTemp.on('value', snap => {
     console.log(snap.val());
 
+		temp = snap.val();
     if (mMeasurements == "f") {
       temp = +((temp * 1.8) + 32).toFixed(2); //  ( + ) at the start of this command Converts the String to a number
     }
-
-    temp = snap.val();
-    temp = parseFloat(temp);  // Getting Temp from firebase as String - parsing it into float (this is needed for the gauge element)
-    waterTempTV.innerText = temp  + " °C";
+    waterTempTV.innerText = parseFloat(temp)  + " °" + mMeasurements.toUpperCase();
   });
 
   dbRefWaterPH.on('value', snap => {
