@@ -90,8 +90,8 @@ function fromFBToCharts() {
       var dataFromFB = snapshot.val();
       var arry = snapshotToArray("temp", snapshot);
       console.log(arry);
-      if (document.getElementById("temperatureChart")) {
-      	new Chart(document.getElementById("temperatureChart").getContext("2d")).Line(arry);
+      if (document.getElementById("waterTemperatureChart")) {
+      	new Chart(document.getElementById("waterTemperatureChart").getContext("2d")).Line(arry);
       }
     });
     
